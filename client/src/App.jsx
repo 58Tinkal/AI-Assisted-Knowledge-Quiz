@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QuizProvider } from "./context/QuizContext.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+import StartPage from "./pages/StartPage.jsx";
+import CustomizePage from "./pages/CustomizePage.jsx";
+import QuizPage from "./pages/QuizPage.jsx";
+import ReportPage from "./pages/ReportPage.jsx";
 
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <QuizProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<StartPage />} />
+          <Route path="/customize" element={<CustomizePage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/report" element={<ReportPage />} />
+        </Routes>
+      </BrowserRouter>
+    </QuizProvider>
+  );
 }
-
-export default App
