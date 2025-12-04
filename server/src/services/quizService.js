@@ -1,5 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
+console.log("API Key present:", !!process.env.GEMINI_API_KEY);
+console.log("Model:", "gemini-2.5-flash");
+
 if (!process.env.GEMINI_API_KEY) {
   console.error("❌ GEMINI_API_KEY is not set in .env");
   throw new Error("GEMINI_API_KEY is required for quiz generation");
