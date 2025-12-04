@@ -3,11 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../context/QuizContext.jsx";
 
 const SUBJECT_OPTIONS = [
-  "Science",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Computer Science",
   "Geography",
   "History",
+  "Civics",
+  "Economics",
+  "English Literature",
   "React",
   "JavaScript",
+  "Data Structures",
+  "Aptitude",
+  "General Knowledge",
 ];
 
 export default function StartPage() {
