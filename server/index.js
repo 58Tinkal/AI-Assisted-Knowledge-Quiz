@@ -8,7 +8,11 @@ import userRoutes from "./src/routes/userRoutes.js";
 
 const app = express();
 
-app.use(cors());
+// CORS configuration - allow all origins in production, or specific ones
+app.use(cors({
+  origin: process.env.CLIENT_URL || "*",
+  credentials: true,
+}));
 app.use(express.json());
 
 // Health check route
@@ -20,9 +24,13 @@ app.get("/", (req, res) => {
 app.use("/api/quiz", quizRoutes);
 app.use("/api/users", userRoutes);
 
-// Start server
-const PORT = process.env.PORT || 5000;
+// Export for Vercel serverless
+export default app;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Start server locally (only if not in Vercel environment)
+if (process.env.VERCEL !== "1") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}

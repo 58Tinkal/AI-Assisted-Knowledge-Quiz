@@ -1,9 +1,16 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+// For production, use environment variable or default to relative path
+// If deploying separately, set VITE_API_BASE to your backend URL (e.g., https://your-backend.vercel.app/api)
+// If deploying together, use relative path or proxy
+const API_BASE = import.meta.env.VITE_API_BASE || 
+  (import.meta.env.PROD ? "/api" : "http://localhost:5000/api");
 
 const api = axios.create({
   baseURL: API_BASE,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 // user profile (simple echo for now)
