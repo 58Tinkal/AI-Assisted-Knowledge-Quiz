@@ -73,9 +73,7 @@ export default function ReportPage() {
             Test Report for{" "}
             <span className="title-highlight">{userName}</span>
           </h2>
-          <p
-            style={{ textAlign: "center", color: "#6b7280", marginTop: "-8px" }}
-          >
+          <p className="report-subtitle">
             Subject: {subject}
           </p>
 
@@ -126,7 +124,7 @@ export default function ReportPage() {
 
           {/* Numeric summary + AI feedback */}
           <div className="row" style={{ marginTop: "24px" }}>
-            <div className="column">
+            <div className="column summary-column">
               <h3>Summary</h3>
               <p>Total Questions: {total}</p>
               <p>Correct: {summary.correct}</p>
@@ -134,25 +132,16 @@ export default function ReportPage() {
               <p>Skipped: {summary.skipped}</p>
             </div>
 
-            <div className="column">
+            <div className="column feedback-column">
               <h3>AI Feedback</h3>
-              <p style={{ color: "#4b5563", whiteSpace: "pre-line" }}>
+              <p className="feedback-text">
                 {feedback || "Feedback not available."}
               </p>
             </div>
           </div>
 
           {/* Bottom buttons */}
-          <div
-            style={{
-              marginTop: "32px",
-              textAlign: "center",
-              display: "flex",
-              justifyContent: "center",
-              gap: "16px",
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="report-buttons-container">
             <button
               className="secondary-btn outline-btn"
               onClick={() => setViewMode("analysis")}
@@ -181,9 +170,7 @@ export default function ReportPage() {
             ⬅ Back to Report
           </button>
         </div>
-        <p
-          style={{ textAlign: "center", color: "#6b7280", marginTop: "-8px" }}
-        >
+        <p className="report-subtitle">
           Subject: {subject} • Total Questions: {total}
         </p>
 

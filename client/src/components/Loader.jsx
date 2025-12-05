@@ -3,7 +3,7 @@ export default function Loader({ text = "Loading..." }) {
     <div className="page-container">
       <div className="card" style={{ textAlign: "center" }}>
         <div className="spinner" />
-        <p style={{ marginTop: "16px", color: "#4b5563" }}>{text}</p>
+        <p className="loader-text">{text}</p>
       </div>
     </div>
   );
