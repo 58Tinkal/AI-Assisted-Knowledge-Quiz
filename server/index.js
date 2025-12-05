@@ -24,6 +24,16 @@ app.get("/", (req, res) => {
 app.use("/api/quiz", quizRoutes);
 app.use("/api/users", userRoutes);
 
+// 404 handler for undefined routes
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found",
+    path: req.path,
+    method: req.method,
+    message: `Cannot ${req.method} ${req.path}. Available routes: /api/quiz/generate, /api/quiz/feedback, /api/users`
+  });
+});
+
 // Export for Vercel serverless
 export default app;
 
