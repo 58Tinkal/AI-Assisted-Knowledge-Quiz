@@ -626,3 +626,147 @@ body {
   color: #ffffff;
 }
 
+/* =================== THEME BASE =================== */
+
+body.theme-light {
+  background: #f3f5f9;
+  color: #0f172a;
+}
+
+body.theme-dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* Cards & common elements in dark mode */
+body.theme-dark .card {
+  background: #020617;
+  border-color: #1f2937;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+}
+
+body.theme-dark .title {
+  color: #e5e7eb;
+}
+
+body.theme-dark .title-highlight {
+  color: #38bdf8;
+}
+
+body.theme-dark .primary-btn {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  color: #f9fafb;
+}
+
+body.theme-dark .secondary-btn,
+body.theme-dark .outline-btn {
+  background: transparent;
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+/* Adjust charts/card backgrounds slightly */
+body.theme-dark .palette-card,
+body.theme-dark .question-card,
+body.theme-dark .details-card,
+body.theme-dark .analysis-section {
+  background: #020617;
+  border-color: #1f2937;
+}
+
+/* =================== THEME TOGGLE BUTTON =================== */
+
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 50;
+}
+
+/* main pill */
+.theme-toggle {
+  position: relative;
+  min-width: 110px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  background: transparent;
+  outline: none;
+}
+
+/* background track */
+.theme-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #e5e7eb, #cbd5f5);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+  transition: background 0.25s ease;
+}
+
+/* thumb */
+.theme-toggle-thumb {
+  position: absolute;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.35);
+  transform: translateX(0);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+/* icons & label */
+.theme-toggle-icon {
+  position: relative;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.theme-toggle-icon-left {
+  margin-left: 6px;
+}
+
+.theme-toggle-icon-right {
+  margin-left: auto;
+  margin-right: 6px;
+}
+
+.theme-toggle-label {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* LIGHT MODE appearance */
+.theme-toggle-light .theme-toggle-track {
+  background: linear-gradient(135deg, #e5e7eb, #cbd5f5);
+}
+
+.theme-toggle-light .theme-toggle-thumb {
+  transform: translateX(0);
+}
+
+/* DARK MODE appearance */
+.theme-toggle-dark .theme-toggle-track {
+  background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+.theme-toggle-dark .theme-toggle-thumb {
+  transform: translateX(64px);
+  background: #020617;
+}
+
+/* label color in dark mode */
+body.theme-dark .theme-toggle-label {
+  color: #e5e7eb;
+}
