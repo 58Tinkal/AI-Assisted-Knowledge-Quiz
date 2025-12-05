@@ -91,7 +91,7 @@ export default function StartPage() {
           Next
         </button>
 
-        <p className="footer-text">ExamPrep © 2025 | All rights reserved</p>
+        <p className="footer-text">tinkal © 2025 | All rights reserved</p>
       </div>
     </div>
   );
