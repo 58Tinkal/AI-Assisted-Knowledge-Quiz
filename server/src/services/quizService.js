@@ -62,11 +62,11 @@ Rules:
 - All questions must be unique and accurate.
 `;
 
-  // 🔁 UPDATED MODEL NAME HERE
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-  // If that gives issues with your key, try: "gemini-2.0-flash"
 
-  // try a couple of times to get valid JSON
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+
+
   for (let attempt = 1; attempt <= 2; attempt++) {
     const result = await model.generateContent(prompt);
     const raw = result.response.text();
@@ -86,7 +86,7 @@ Rules:
     console.warn(`⚠️ Gemini returned invalid JSON, attempt ${attempt}`);
   }
 
-  // if we reach here, it's a hard failure
+
   throw new Error("Gemini did not return valid questions JSON");
 }
 
@@ -106,9 +106,9 @@ Write a short, friendly feedback message in 3-5 sentences:
 Return ONLY the feedback text. No JSON, no bullet points.
 `;
 
-  // 🔁 UPDATED MODEL NAME HERE TOO
+
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-  // Or "gemini-2.0-flash" if your account only supports that
+
 
   const result = await model.generateContent(prompt);
   const text = result.response.text();
