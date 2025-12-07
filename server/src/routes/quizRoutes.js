@@ -20,7 +20,17 @@ router.post("/generate", async (req, res) => {
     res.json({ questions });
   } catch (err) {
     console.error("Quiz generation error:", err.message);
-    res.status(500).json({ error: "Failed to generate quiz" });
+    
+    // Check if it's a quota error
+    if (err.message.includes("quota") || err.message.includes("API quota")) {
+      return res.status(429).json({ 
+        error: err.message || "API quota exceeded. Please wait a few minutes and try again." 
+      });
+    }
+    
+    res.status(500).json({ 
+      error: err.message || "Failed to generate quiz. Please try again later." 
+    });
   }
 });
 
@@ -31,7 +41,17 @@ router.post("/feedback", async (req, res) => {
     res.json({ feedback });
   } catch (err) {
     console.error("Feedback error:", err.message);
-    res.status(500).json({ error: "Failed to generate feedback" });
+    
+    // Check if it's a quota error
+    if (err.message.includes("quota") || err.message.includes("API quota")) {
+      return res.status(429).json({ 
+        error: err.message || "API quota exceeded. Please wait a few minutes and try again." 
+      });
+    }
+    
+    res.status(500).json({ 
+      error: err.message || "Failed to generate feedback. Please try again later." 
+    });
   }
 });
 
