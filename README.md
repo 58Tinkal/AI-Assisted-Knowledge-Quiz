@@ -688,4 +688,4 @@ For questions or support, please open an issue on GitHub or contact the maintain
 
 ---
 
-**Made with ❤️ using React and AI**
+**Made with  using React and AI**
