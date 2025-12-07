@@ -11,7 +11,7 @@ if (!process.env.GEMINI_API_KEY) {
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Safely parse JSON from AI
+
 function safeParseJson(raw) {
   try {
     return JSON.parse(raw);
@@ -61,7 +61,7 @@ Rules:
 - All questions must be unique and accurate.
 `;
 
-  // 🔁 UPDATED MODEL NAME HERE
+
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   // If that gives issues with your key, try: "gemini-2.0-flash"
 
@@ -82,10 +82,9 @@ Rules:
       return parsed.questions;
     }
 
-    console.warn(`⚠️ Gemini returned invalid JSON, attempt ${attempt}`);
+    console.warn(` Gemini returned invalid JSON, attempt ${attempt}`);
   }
 
-  // if we reach here, it's a hard failure
   throw new Error("Gemini did not return valid questions JSON");
 }
 
@@ -105,7 +104,7 @@ Write a short, friendly feedback message in 3-5 sentences:
 Return ONLY the feedback text. No JSON, no bullet points.
 `;
 
-  // 🔁 UPDATED MODEL NAME HERE TOO
+
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   // Or "gemini-2.0-flash" if your account only supports that
 

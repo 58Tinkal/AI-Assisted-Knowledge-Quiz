@@ -157,7 +157,7 @@ export default function ReportPage() {
     );
   }
 
-  // ---------------- ANALYSIS VIEW ----------------
+  // ANALYSIS VIEW
   return (
     <div className="page-container">
       <div className="card">

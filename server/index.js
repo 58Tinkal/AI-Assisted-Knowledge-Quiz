@@ -1,4 +1,4 @@
-// server/index.js
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -8,7 +8,7 @@ import userRoutes from "./src/routes/userRoutes.js";
 
 const app = express();
 
-// CORS configuration - allow all origins in production, or specific ones
+
 app.use(cors({
   origin: process.env.CLIENT_URL || "*",
   credentials: true,
@@ -34,7 +34,6 @@ app.use((req, res) => {
   });
 });
 
-// Export for Vercel serverless
 export default app;
 
 // Start server locally (only if not in Vercel environment)
