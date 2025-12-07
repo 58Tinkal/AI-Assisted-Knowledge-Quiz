@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../context/QuizContext.jsx";
 import Loader from "../components/Loader.jsx";
@@ -15,7 +15,9 @@ export default function CustomizePage() {
     startQuiz,
     isLoading,
     subject,
+    topic,
     userName,
+    resetLoading,
   } = useQuiz();
 
   const [selectedCount, setSelectedCount] = useState(count || 5);
@@ -23,14 +25,39 @@ export default function CustomizePage() {
     difficulty || "Easy"
   );
 
-  const handleStart = async () => {
-    setQuizConfig({
-      count: Number(selectedCount),
-      difficulty: selectedDifficulty,
-    });
+  // Reset isLoading when component mounts to prevent showing loader from stale state
+  // This only runs once when the page first loads
+  useEffect(() => {
+    // Reset loading state on mount to ensure we show the form, not a stale loader
+    // This won't interfere with loading that starts after user clicks "Start Test"
+    resetLoading();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on mount - won't run again when isLoading changes
 
-    await startQuiz();
-    navigate("/quiz");
+  const handleStart = async () => {
+    try {
+      // Update config first (for persistence)
+      setQuizConfig({
+        count: Number(selectedCount),
+        difficulty: selectedDifficulty,
+      });
+
+      // Start quiz generation with all required values
+      // This will set isLoading to true and show the loader
+      await startQuiz({
+        subject: subject, // From context (set on previous page)
+        topic: topic || subject, // Use topic if set, otherwise use subject
+        count: Number(selectedCount),
+        difficulty: selectedDifficulty,
+      });
+
+      // Only navigate after quiz is successfully generated
+      navigate("/quiz");
+    } catch (err) {
+      console.error("Failed to start quiz:", err);
+      // Error is already handled in startQuiz, but we can show an alert
+      alert("Failed to generate quiz. Please try again.");
+    }
   };
 
   const handleBack = () => {

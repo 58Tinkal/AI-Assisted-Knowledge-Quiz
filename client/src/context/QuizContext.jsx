@@ -44,7 +44,8 @@ export function QuizProvider({ children }) {
     return status;
   };
 
-  const startQuiz = async () => {
+  const startQuiz = async (overrides = {}) => {
+    // Set loading state first - this will trigger the loader to show
     update({
       isLoading: true,
       questions: [],
@@ -56,25 +57,35 @@ export function QuizProvider({ children }) {
     });
 
     try {
-      const questions = await generateQuiz({
-        subject: state.subject,
-        topic: state.topic,
-        count: state.count,
-        difficulty: state.difficulty,
-      });
+      // Use overrides if provided, otherwise fall back to state values
+      // This ensures we use the exact values passed, avoiding stale state issues
+      const quizParams = {
+        subject: overrides.subject || state.subject,
+        topic: overrides.topic || state.topic || state.subject,
+        count: overrides.count !== undefined ? overrides.count : state.count,
+        difficulty: overrides.difficulty || state.difficulty,
+      };
 
+      console.log("Generating quiz with params:", quizParams);
+
+      // Generate quiz
+      const questions = await generateQuiz(quizParams);
+
+      console.log("Quiz generated successfully, questions count:", questions.length);
+
+      // Build status and update state
       const status = buildInitialStatus(questions);
 
-      setState((s) => ({
-        ...s,
+      update({
         questions,
         status,
         currentIndex: 0,
         isLoading: false,
-      }));
+      });
     } catch (err) {
       console.error("startQuiz error:", err);
       update({ isLoading: false });
+      throw err; // Re-throw so caller can handle it
     }
   };
 
@@ -189,6 +200,10 @@ export function QuizProvider({ children }) {
     });
   };
 
+  const resetLoading = () => {
+    update({ isLoading: false });
+  };
+
   const value = {
     ...state,
     setBasicInfo,
@@ -201,6 +216,7 @@ export function QuizProvider({ children }) {
     goPrev,
     finishQuiz,
     resetForNewTest,
+    resetLoading,
   };
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
