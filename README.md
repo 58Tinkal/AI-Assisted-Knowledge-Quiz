@@ -70,30 +70,35 @@ VITE_API_BASE=http://localhost:5000
 #### Development Mode
 
 **Terminal 1 - Start Backend:**
+
 ```bash
 cd server
 npm start
 ```
 
 **Terminal 2 - Start Frontend:**
+
 ```bash
 cd client
 npm run dev
 ```
 
 The application will be available at:
+
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5000
 
 #### Production Build
 
 **Build Frontend:**
+
 ```bash
 cd client
 npm run build
 ```
 
 **Start Production Server:**
+
 ```bash
 cd server
 npm start
@@ -101,8 +106,8 @@ npm start
 
 ### Demo
 
-- **Live Demo**: [Add your hosted link here]
-- **Screen Recording**: [Add screen recording link here]
+- **Live Demo**: [https://ai-assisted-knowledge-quiz-one.vercel.app/]
+- **Screen Recording**: [https://drive.google.com/file/d/1qpqHNqcix0CWMXvNuzlscSYgFHtZMX_o/view?usp=drive_link]
 
 ---
 
@@ -111,6 +116,7 @@ npm start
 ### Problem Statement
 
 The goal was to create an intelligent quiz application that:
+
 1. Generates contextually relevant quiz questions using AI
 2. Provides a smooth, interactive user experience
 3. Offers personalized feedback based on performance
@@ -140,11 +146,13 @@ The goal was to create an intelligent quiz application that:
 ### Initial Approach
 
 **Initial Prompt (v1):**
+
 ```
 Generate ${count} multiple choice questions for ${subject} with difficulty ${difficulty}.
 ```
 
 **Issues Faced:**
+
 - AI returned inconsistent JSON formats
 - Sometimes included explanations or markdown formatting
 - Questions didn't always match the specified difficulty level
@@ -152,6 +160,7 @@ Generate ${count} multiple choice questions for ${subject} with difficulty ${dif
 ### Refined Prompts
 
 **Question Generation Prompt (Current):**
+
 ```
 You are a quiz generator. Create exactly ${n} multiple choice questions
 for the topic "${finalTopic}" with difficulty "${difficulty}".
@@ -180,6 +189,7 @@ Rules:
 ```
 
 **Feedback Generation Prompt:**
+
 ```
 You are a helpful tutor. A user completed a quiz.
 
@@ -205,6 +215,7 @@ Return ONLY the feedback text. No JSON, no bullet points.
 ### AI Service Implementation
 
 Located in `server/src/services/quizService.js`:
+
 - Uses `@google/generative-ai` package
 - Implements error handling and retry logic
 - Validates response structure before returning
@@ -260,6 +271,7 @@ AI-Assisted_Quiz/
 ### Technology Stack
 
 **Frontend:**
+
 - **React 19.2.0** - UI library
 - **Vite 7.2.4** - Build tool and dev server
 - **React Router DOM 7.10.0** - Client-side routing
@@ -268,6 +280,7 @@ AI-Assisted_Quiz/
 - **CSS Variables** - Theming system
 
 **Backend:**
+
 - **Express.js 5.2.1** - Web framework
 - **Google Generative AI** - AI question generation
 - **CORS** - Cross-origin resource sharing
@@ -276,21 +289,25 @@ AI-Assisted_Quiz/
 ### Key Architectural Decisions
 
 #### 1. State Management
+
 - **React Context API**: Used for global state (quiz data, theme)
 - **localStorage**: Persists quiz state across sessions
 - **Custom Hook**: `useLocalStorage` for state persistence
 
 #### 2. Component Architecture
+
 - **Page Components**: Each route has its own page component
 - **Reusable Components**: Shared UI components (cards, buttons, charts)
 - **Context Providers**: Separated concerns (Quiz, Theme)
 
 #### 3. API Design
+
 - **RESTful Routes**: `/api/quiz/generate`, `/api/quiz/feedback`, `/api/users`
 - **Error Handling**: Comprehensive error responses with helpful messages
 - **CORS Configuration**: Supports cross-origin requests
 
 #### 4. Styling Approach
+
 - **CSS Variables**: Theme-aware color system
 - **Responsive Design**: Mobile-first approach with breakpoints
 - **Dark Mode**: Full dark/light theme support
@@ -306,26 +323,31 @@ User Interface ← React Component ← Context API ← API Response ← JSON Res
 ### Key Files Explained
 
 **`client/src/App.jsx`**
+
 - Main application component
 - Sets up routing and context providers
 - Includes theme toggle for all pages
 
 **`client/src/context/QuizContext.jsx`**
+
 - Manages quiz state (questions, answers, progress)
 - Handles quiz generation, navigation, and submission
 - Persists state to localStorage
 
 **`client/src/context/ThemeContext.jsx`**
+
 - Manages theme state (light/dark)
 - Applies theme classes to document body
 - Persists theme preference
 
 **`server/src/services/quizService.js`**
+
 - Interfaces with Google Gemini AI
 - Generates quiz questions and feedback
 - Implements JSON parsing and retry logic
 
 **`server/src/routes/quizRoutes.js`**
+
 - Handles `/api/quiz/generate` and `/api/quiz/feedback` endpoints
 - Validates request data
 - Calls quiz service and returns responses
@@ -337,30 +359,35 @@ User Interface ← React Component ← Context API ← API Response ← JSON Res
 ### Core Features
 
 ✅ **AI-Powered Question Generation**
+
 - Dynamic question generation using Google Gemini AI
 - Support for multiple subjects and topics
 - Adjustable difficulty levels (Easy, Medium, Hard)
 - Customizable number of questions (5, 10, 15)
 
 ✅ **Interactive Quiz Experience**
+
 - Real-time progress tracking
 - Question navigation (Previous/Next)
 - Mark for review functionality
 - Question status indicators (Not Visited, Not Answered, Answered, Marked)
 
 ✅ **Comprehensive Reporting**
+
 - Visual performance charts (Pie and Bar charts)
 - Detailed score breakdown
 - AI-generated personalized feedback
 - Question-by-question analysis
 
 ✅ **Modern UI/UX**
+
 - Dark/Light theme toggle
 - Fully responsive design (mobile, tablet, desktop)
 - Smooth animations and transitions
 - Accessible design with keyboard navigation
 
 ✅ **State Persistence**
+
 - Quiz progress saved to localStorage
 - Theme preference persistence
 - Session continuity
@@ -379,59 +406,69 @@ User Interface ← React Component ← Context API ← API Response ← JSON Res
 
 ### Application Screenshots
 
-> **Note**: Screenshots will be added here. Please include:
-> - Start Page (with form)
-> - Customize Page (question count and difficulty selection)
-> - Quiz Page (question display with sidebar)
-> - Report Page (charts and analysis)
-> - Dark mode examples
-> - Mobile responsive views
-
 #### Screenshot Placeholders
 
 **Start Page**
-```
-[Add screenshot: StartPage.png]
-```
+
+![startpage](https://github.com/user-attachments/assets/426af366-1e1f-49d6-841d-e82f1f384513)
 
 **Customize Page**
+
+![customize](https://github.com/user-attachments/assets/500c19a7-baca-4273-8e33-d9fce3fb1414)
+
 ```
 [Add screenshot: CustomizePage.png]
 ```
 
 **Quiz Page**
+
+![quizPage](https://github.com/user-attachments/assets/bed42641-8fc4-45f3-941b-00252ece693f)
+
 ```
 [Add screenshot: QuizPage.png]
 ```
 
 **Report Page - Summary View**
+
+![report1](https://github.com/user-attachments/assets/77da5c52-d3b8-42a0-a803-5a2f5d21bc42)
+
+![report2](https://github.com/user-attachments/assets/a94f6bca-199f-4da0-af25-c68ad913e3cf)
+
 ```
 [Add screenshot: ReportPage-Summary.png]
 ```
 
 **Report Page - Analysis View**
+
+![Analysis](https://github.com/user-attachments/assets/a19ce1ab-4eff-4cf6-8e92-7a617845b1a0)
+
 ```
 [Add screenshot: ReportPage-Analysis.png]
 ```
 
 **Dark Mode**
+
+![darkmode](https://github.com/user-attachments/assets/8314ed7d-4f8d-47ac-893e-69cc516e564b)
+
 ```
 [Add screenshot: DarkMode.png]
 ```
 
 **Mobile View**
+
+![mobileview](https://github.com/user-attachments/assets/e2efe52c-27cf-4868-b9b0-e5d1f4a0abb0)
+
 ```
 [Add screenshot: MobileView.png]
 ```
 
+**AI Feedback**
+
+![AIfeedback](https://github.com/user-attachments/assets/78d2a398-dfbd-4f7e-b5c3-4247590876b5)
+
 ### Screen Recording
 
-> **Note**: Add a screen recording demonstrating:
-> - Complete user flow from start to report
-> - Theme switching
-> - Question navigation
-> - Chart toggling
-> - Mobile responsiveness
+[https://drive.google.com/file/d/1qpqHNqcix0CWMXvNuzlscSYgFHtZMX_o/view?usp=drive_link]
 
 ---
 
@@ -462,6 +499,7 @@ The application is configured for deployment on Vercel.
 ### Environment Variables
 
 **Backend (.env)**
+
 ```env
 GEMINI_API_KEY=your_api_key_here
 PORT=5000
@@ -469,6 +507,7 @@ CLIENT_URL=https://your-frontend.vercel.app
 ```
 
 **Frontend (.env)**
+
 ```env
 VITE_API_BASE=https://your-backend.vercel.app
 ```
@@ -489,16 +528,19 @@ VITE_API_BASE=https://your-backend.vercel.app
 ### Known Issues
 
 1. **AI Response Parsing**
+
    - **Issue**: Occasionally, Gemini returns malformed JSON
    - **Current Solution**: Retry mechanism with fallback parsing
    - **Improvement**: Implement more robust JSON extraction or switch to structured output
 
 2. **Question Quality**
+
    - **Issue**: Some generated questions may not perfectly match difficulty level
    - **Current Solution**: Prompt engineering with explicit difficulty instructions
    - **Improvement**: Add question validation or post-processing
 
 3. **State Management**
+
    - **Issue**: Large quiz state in localStorage may impact performance
    - **Current Solution**: Basic localStorage implementation
    - **Improvement**: Implement state compression or pagination
@@ -513,16 +555,19 @@ VITE_API_BASE=https://your-backend.vercel.app
 #### Short-term (1-2 weeks)
 
 1. **Enhanced Question Types**
+
    - Support for true/false questions
    - Multiple correct answers
    - Fill-in-the-blank questions
 
 2. **User Authentication**
+
    - User accounts and profiles
    - Quiz history tracking
    - Performance analytics over time
 
 3. **Question Bank**
+
    - Save favorite questions
    - Create custom question sets
    - Share quizzes with others
@@ -535,16 +580,19 @@ VITE_API_BASE=https://your-backend.vercel.app
 #### Medium-term (1-2 months)
 
 1. **Advanced Analytics**
+
    - Performance trends over time
    - Subject-wise breakdown
    - Weak area identification
 
 2. **Social Features**
+
    - Leaderboards
    - Quiz sharing
    - Collaborative quizzes
 
 3. **Offline Support**
+
    - Service worker implementation
    - Offline quiz taking
    - Sync when online
@@ -557,16 +605,19 @@ VITE_API_BASE=https://your-backend.vercel.app
 #### Long-term (3+ months)
 
 1. **Multi-language Support**
+
    - Internationalization (i18n)
    - Questions in multiple languages
    - Regional difficulty adjustments
 
 2. **Advanced AI Features**
+
    - Adaptive difficulty based on performance
    - Personalized learning paths
    - Explanation generation for incorrect answers
 
 3. **Mobile App**
+
    - React Native version
    - Push notifications
    - Offline-first architecture
@@ -579,16 +630,19 @@ VITE_API_BASE=https://your-backend.vercel.app
 ### Technical Debt
 
 1. **Testing**
+
    - Add unit tests for components
    - Integration tests for API routes
    - E2E tests for critical user flows
 
 2. **Type Safety**
+
    - Migrate to TypeScript
    - Add PropTypes or similar
    - API response validation
 
 3. **Performance**
+
    - Code splitting for routes
    - Lazy loading for charts
    - Image optimization
