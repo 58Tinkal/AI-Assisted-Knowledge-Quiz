@@ -55,4 +55,27 @@ router.post("/feedback", async (req, res) => {
   }
 });
 
+// Test endpoint to verify API key is set
+router.get("/test", async (req, res) => {
+  try {
+    console.log("\n🧪 API Key Test Requested");
+    const apiKeyPresent = !!process.env.GEMINI_API_KEY;
+    
+    res.json({
+      success: apiKeyPresent,
+      message: apiKeyPresent 
+        ? "✅ API Key is configured and ready to use."
+        : "❌ API Key is not set in environment variables.",
+      apiKeyConfigured: apiKeyPresent,
+      model: "gemini-2.5-flash"
+    });
+  } catch (err) {
+    console.error("Test error:", err.message);
+    res.status(500).json({ 
+      success: false,
+      error: err.message || "Failed to test API key" 
+    });
+  }
+});
+
 export default router;
